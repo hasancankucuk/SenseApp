@@ -1,10 +1,11 @@
-import 'package:flutter/material.dart';
 import 'dart:io';
+import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 void main() {
   runApp(new MaterialApp(
     title: 'Bitirme Ödevi',
+    theme: ThemeData(fontFamily: 'PatrickHand'),
     home: LandingScreen(),
   ));
 }
@@ -37,22 +38,41 @@ class _LandingScreenState extends State<LandingScreen> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text("Seçim Yapın"),
+            title: Center(
+                child: Text("Seçim Yapın",
+                    style: TextStyle(
+                      fontSize: 25,
+                      color: Color(0xff212121),
+                    ))),
             content: SingleChildScrollView(
               child: ListBody(
                 children: [
-                  GestureDetector(
-                    child: Text("Galeri"),
-                    onTap: () {
-                      _openGaleri(context);
-                    },
+                  Center(
+                    child: GestureDetector(
+                      child: Text(
+                        "Galeri",
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Color(0xff212121),
+                        ),
+                      ),
+                      onTap: () {
+                        _openGaleri(context);
+                      },
+                    ),
                   ),
                   Padding(padding: EdgeInsets.all(8.0)),
-                  GestureDetector(
-                    child: Text("Kamera"),
-                    onTap: () {
-                      _openKamera(context);
-                    },
+                  Center(
+                    child: GestureDetector(
+                      child: Text("Kamera",
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: Color(0xff212121),
+                          )),
+                      onTap: () {
+                        _openKamera(context);
+                      },
+                    ),
                   ),
                 ],
               ),
@@ -63,26 +83,50 @@ class _LandingScreenState extends State<LandingScreen> {
 
   Widget _decideImageView() {
     if (imageFile == null) {
-      return Text("Resim Seçilmedi. Lütfen Resim Seçin.");
+      return Text("Resim Seçilmedi. Lütfen Resim Seçin.",
+          style: TextStyle(fontSize: 20, color: Color(0xff212121)));
     } else {
-      return Image.file(
-        imageFile,
-        width: 500,
-        height: 500,
+      return Container(
+        decoration: BoxDecoration(color: Color(0xffB3E5FC),border: Border.all(color: Color(0xffB3E5FC))),
+        child: Image.file(
+          imageFile,
+          width: 400,
+          height: 400,
+        ),
       );
+    }
+  }
+
+  Widget _useImage() {
+    if (imageFile != null) {
+      return RaisedButton(
+        padding: EdgeInsets.fromLTRB(25, 15, 25, 15),
+        color: Color(0xffB3E5FC),
+        elevation: 7.0,
+        splashColor: Color(0xff448AFF),
+        shape: RoundedRectangleBorder(
+          borderRadius: new BorderRadius.circular(5.0),
+          side: BorderSide(color: Color(0xff0288D1)),
+        ),
+        onPressed: () {},
+        child: Text(
+          "RESMİ KULLAN",
+          style: TextStyle(fontSize: 20, color: Color(0xff212121)),
+        ),
+      );
+    } else {
+      return Text("");
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.orangeAccent,
-      appBar: 
-        AppBar(
-          backgroundColor: Colors.orange,
-          title: Center(child: Text("Duygu Analizi")),
-        ),
-      
+      backgroundColor: Color(0xff03A9F4),
+      appBar: AppBar(
+        backgroundColor: Color(0xff0288D1),
+        title: Center(child: Text("SENSEAPP", style: TextStyle(fontSize: 35))),
+      ),
       body: Container(
         child: Center(
           child: Column(
@@ -90,11 +134,23 @@ class _LandingScreenState extends State<LandingScreen> {
             children: [
               _decideImageView(),
               RaisedButton(
+                padding: EdgeInsets.fromLTRB(20, 15, 25, 15),
+                color: Color(0xffB3E5FC),
+                elevation: 7.0,
+                splashColor: Color(0xff448AFF),
+                shape: RoundedRectangleBorder(
+                  borderRadius: new BorderRadius.circular(5.0),
+                  side: BorderSide(color: Color(0xff0288D1)),
+                ),
                 onPressed: () {
                   _showChoiceDialog(context);
                 },
-                child: Text("Resim seçin!"),
-              )
+                child: Text(
+                  "RESİM SEÇ",
+                  style: TextStyle(fontSize: 20),
+                ),
+              ),
+              _useImage(),
             ],
           ),
         ),
