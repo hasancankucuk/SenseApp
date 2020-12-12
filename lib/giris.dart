@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
+import 'dart:ui';
 
 class LandingScreen extends StatefulWidget {
   @override
@@ -10,6 +11,7 @@ class LandingScreen extends StatefulWidget {
 class _LandingScreenState extends State<LandingScreen> {
   File imageFile;
   _openGaleri(BuildContext context) async {
+    // ignore: deprecated_member_use
     var picture = await ImagePicker.pickImage(source: ImageSource.gallery);
     this.setState(() {
       imageFile = picture;
@@ -18,6 +20,7 @@ class _LandingScreenState extends State<LandingScreen> {
   }
 
   _openKamera(BuildContext context) async {
+    // ignore: deprecated_member_use
     var picture = await ImagePicker.pickImage(source: ImageSource.camera);
     this.setState(() {
       imageFile = picture;
@@ -75,7 +78,7 @@ class _LandingScreenState extends State<LandingScreen> {
 
   Widget _decideImageView() {
     if (imageFile == null) {
-      return Text("Resim Seçilmedi. Lütfen Resim Seçin.",
+      return Text("Fotoğraf Seçilmedi. Lütfen Fotoğraf Seçin.",
           style: TextStyle(fontSize: 20, color: Color(0xff212121)));
     } else {
       return Container(
@@ -84,8 +87,9 @@ class _LandingScreenState extends State<LandingScreen> {
             border: Border.all(color: Color(0xffB3E5FC))),
         child: Image.file(
           imageFile,
-          width: 400,
-          height: 400,
+          width: 300,
+          height: 300,
+          fit: BoxFit.contain,
         ),
       );
     }
@@ -93,9 +97,15 @@ class _LandingScreenState extends State<LandingScreen> {
 
   Widget _changeImage() {
     if (imageFile != null) {
-      return Text("YENİ RESİM",style: TextStyle(fontSize: 20),);
+      return Text(
+        "YENİ FOTOĞRAF",
+        style: TextStyle(fontSize: 20),
+      );
     } else {
-      return Text("RESİM SEÇ",style: TextStyle(fontSize: 20),);
+      return Text(
+        "FOTOĞRAF SEÇ",
+        style: TextStyle(fontSize: 20),
+      );
     }
   }
 
@@ -112,7 +122,7 @@ class _LandingScreenState extends State<LandingScreen> {
         ),
         onPressed: () {},
         child: Text(
-          "RESMİ KULLAN",
+          "FOTOĞRAFI KULLAN",
           style: TextStyle(fontSize: 20, color: Color(0xff212121)),
         ),
       );
@@ -147,7 +157,7 @@ class _LandingScreenState extends State<LandingScreen> {
                 onPressed: () {
                   _showChoiceDialog(context);
                 },
-                child:  _changeImage(),
+                child: _changeImage(),
               ),
               _useImage(),
             ],
