@@ -1,102 +1,62 @@
 import 'package:flutter/material.dart';
-import 'dart:io';
-import 'package:image_picker/image_picker.dart';
+import 'baslangic.dart';
+import 'dart:async';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
+//main fonksiyonunda materialapp çalıştırılmış projenin ana tema rengi mavi olarak belirlenmiş, yine aynı şekilde projenin yazı teması helvetica olarak ayarlanmıştır. proje açılınca ilk karşımıza çıkacak ekran giriş sayfasında oluşturulduğu için giriş sayfası home propertysine atanmıştır.
 void main() {
   runApp(new MaterialApp(
     title: 'Bitirme Ödevi',
-    home: LandingScreen(),
+    theme: ThemeData(
+      primarySwatch: Colors.blue,
+      fontFamily: 'Helvetica',
+    ),
+    home: Giris(),
   ));
 }
 
-class LandingScreen extends StatefulWidget {
+class Giris extends StatefulWidget {
   @override
-  _LandingScreenState createState() => _LandingScreenState();
+  _GirisState createState() => _GirisState();
 }
 
-class _LandingScreenState extends State<LandingScreen> {
-  File imageFile;
-  _openGaleri(BuildContext context) async {
-    var picture = await ImagePicker.pickImage(source: ImageSource.gallery);
-    this.setState(() {
-      imageFile = picture;
+class _GirisState extends State<Giris> with SingleTickerProviderStateMixin {
+  SpinKitRipple spinkit; //splash ekranındaki animasyonun tanıtılması.
+
+  @override
+  void initState() {
+    super.initState();
+
+    spinkit = SpinKitRipple(
+      color: Colors.black87,
+      size: 50.0,
+      controller: AnimationController(
+          vsync: this, duration: const Duration(milliseconds: 1000)), //animasyonun rengi ekranda kalış süresi boyutu gibi özellikler burada ayarlandı.
+    );
+
+    Future.delayed(const Duration(seconds: 3), () async {
+      Navigator.pushReplacement(context,
+          new MaterialPageRoute(builder: (context) => new Baslangic()));// splash ekranının var olma süresi 3 saniye olarak ayarlanıp sonrasında başlangıç sayfasına yönlendirme yapıldı.
     });
-    Navigator.of(context).pop();
-  }
-
-  _openKamera(BuildContext context) async {
-    var picture = await ImagePicker.pickImage(source: ImageSource.camera);
-    this.setState(() {
-      imageFile = picture;
-    });
-    Navigator.of(context).pop();
-  }
-
-  Future<void> _showChoiceDialog(BuildContext context) {
-    return showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text("Seçim Yapın"),
-            content: SingleChildScrollView(
-              child: ListBody(
-                children: [
-                  GestureDetector(
-                    child: Text("Galeri"),
-                    onTap: () {
-                      _openGaleri(context);
-                    },
-                  ),
-                  Padding(padding: EdgeInsets.all(8.0)),
-                  GestureDetector(
-                    child: Text("Kamera"),
-                    onTap: () {
-                      _openKamera(context);
-                    },
-                  ),
-                ],
-              ),
-            ),
-          );
-        });
-  }
-
-  Widget _decideImageView() {
-    if (imageFile == null) {
-      return Text("Resim Seçilmedi. Lütfen Resim Seçin.");
-    } else {
-      return Image.file(
-        imageFile,
-        width: 500,
-        height: 500,
-      );
-    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.orangeAccent,
-      appBar: 
-        AppBar(
-          backgroundColor: Colors.orange,
-          title: Center(child: Text("Duygu Analizi")),
-        ),
-      
-      body: Container(
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              _decideImageView(),
-              RaisedButton(
-                onPressed: () {
-                  _showChoiceDialog(context);
-                },
-                child: Text("Resim seçin!"),
-              )
-            ],
-          ),
+      backgroundColor: Color(0xffB3E5FC),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            spinkit,
+            SizedBox(
+              height: 20,
+            ),
+            Text(
+              "SENSEAPP",
+              style: TextStyle(fontSize: 30),//ekrandaki senseapp yazısının olduğu widgetlar burada oluşturuldu.
+            ),
+          ],
         ),
       ),
     );

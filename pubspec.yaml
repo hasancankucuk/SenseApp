@@ -24,6 +24,9 @@ dependencies:
   image_picker:
   flutter:
     sdk: flutter
+  flutter_spinkit: "4.1.0" 
+  google_fonts: ^0.2.0
+  http: ^0.12.2
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -47,7 +50,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   # assets:
-  #   - images/a_dot_burr.jpeg
+  # - assets/images/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -61,6 +64,13 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
+  fonts:
+    - family: PatrickHand
+      fonts:
+       - asset: assets/fonts/PatrickHand-Regular.ttf
+    - family: Helvetica
+      fonts:
+        - asset: assets/fonts/Helvetica 400.ttf
   # fonts:
   #   - family: Schyler
   #     fonts:
