@@ -1,6 +1,7 @@
 import 'package:bitirme_odevi/giris.dart';
 import 'package:flutter/material.dart';
 
+
 class Baslangic extends StatefulWidget {
   @override
   _BaslangicState createState() => _BaslangicState();

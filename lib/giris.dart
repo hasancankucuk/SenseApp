@@ -1,7 +1,10 @@
+//import 'dart:html';
 import 'package:flutter/material.dart';
-import 'dart:io';
+import 'dart:io' as io;
 import 'package:image_picker/image_picker.dart';
 import 'dart:ui';
+// import 'deneme.dart';
+import 'package:http/http.dart' as http;
 
 class LandingScreen extends StatefulWidget {
   @override
@@ -9,7 +12,7 @@ class LandingScreen extends StatefulWidget {
 }
 
 class _LandingScreenState extends State<LandingScreen> {
-  File imageFile;
+  io.File imageFile;
   _openGaleri(BuildContext context) async {
     // ignore: deprecated_member_use
     var picture = await ImagePicker.pickImage(source: ImageSource.gallery);
@@ -120,11 +123,35 @@ class _LandingScreenState extends State<LandingScreen> {
           borderRadius: new BorderRadius.circular(5.0),
           side: BorderSide(color: Color(0xff2196F3)),
         ),
-        onPressed: () {},
         child: Text(
           "FOTOĞRAFI KULLAN",
           style: TextStyle(fontSize: 20, color: Color(0xff212121)),
         ),
+        onPressed: () async {
+          var request = http.MultipartRequest('POST',
+              Uri.parse('http://192.168.1.26:55777/api/FileUpload/uploadFile'));
+          request.files.add(
+              await http.MultipartFile.fromPath('', imageFile.path.toString()));
+          http.StreamedResponse response = await request.send();
+          if (response.statusCode == 200) {
+            //print(await response.stream.bytesToString());
+            var alertDialog = AlertDialog(
+              title: Text("Analiz Sonucu:"),
+              content: Text(await response.stream.bytesToString()),
+            );
+            showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return alertDialog;
+                });
+          } else if (response.statusCode == 404) {
+            print("Yüz algılanamadı");
+          } else {
+            print(response.reasonPhrase);
+          }
+          // Navigator.push(context,
+          //     new MaterialPageRoute(builder: (context) => new Deneme()));
+        },
       );
     } else {
       return Text("");
