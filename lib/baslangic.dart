@@ -1,7 +1,6 @@
 import 'package:bitirme_odevi/giris.dart';
 import 'package:flutter/material.dart';
 
-// bu dart dosyasında uygulamanın görünüm ve kullanılırlık açısından daha iyi olması için splash ekranı ile analizlerin gerçekleştiği sayfa arasında bir köprü vazifesi gören başlama ekranı oluşturuldu. buton aracılığıyla analiz sayfasına geçiş sağlanmaktadır.
 class Baslangic extends StatefulWidget {
   @override
   _BaslangicState createState() => _BaslangicState();

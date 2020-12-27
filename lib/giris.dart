@@ -12,7 +12,7 @@ class LandingScreen extends StatefulWidget {
 }
 
 class _LandingScreenState extends State<LandingScreen> {
-  File imageFile;// kullanılacak fotoğraf dosyasının tanıtıldığı değişken
+  io.File imageFile;// kullanılacak fotoğraf dosyasının tanıtıldığı değişken
 
   // bu fonksiyon galeriye gitmeyi ve seçilen resmin analiz ekranına verilmesini sağlıyor.
   _openGaleri(BuildContext context) async {
