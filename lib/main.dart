@@ -3,6 +3,7 @@ import 'baslangic.dart';
 import 'dart:async';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
+//main fonksiyonunda materialapp çalıştırılmış projenin ana tema rengi mavi olarak belirlenmiş, yine aynı şekilde projenin yazı teması helvetica olarak ayarlanmıştır. proje açılınca ilk karşımıza çıkacak ekran giriş sayfasında oluşturulduğu için giriş sayfası home propertysine atanmıştır.
 void main() {
   runApp(new MaterialApp(
     title: 'Bitirme Ödevi',
@@ -20,7 +21,7 @@ class Giris extends StatefulWidget {
 }
 
 class _GirisState extends State<Giris> with SingleTickerProviderStateMixin {
-  SpinKitRipple spinkit;
+  SpinKitRipple spinkit; //splash ekranındaki animasyonun tanıtılması.
 
   @override
   void initState() {
@@ -30,12 +31,12 @@ class _GirisState extends State<Giris> with SingleTickerProviderStateMixin {
       color: Colors.black87,
       size: 50.0,
       controller: AnimationController(
-          vsync: this, duration: const Duration(milliseconds: 1000)),
+          vsync: this, duration: const Duration(milliseconds: 1000)), //animasyonun rengi ekranda kalış süresi boyutu gibi özellikler burada ayarlandı.
     );
 
     Future.delayed(const Duration(seconds: 3), () async {
       Navigator.pushReplacement(context,
-          new MaterialPageRoute(builder: (context) => new Baslangic()));
+          new MaterialPageRoute(builder: (context) => new Baslangic()));// splash ekranının var olma süresi 3 saniye olarak ayarlanıp sonrasında başlangıç sayfasına yönlendirme yapıldı.
     });
   }
 
@@ -48,13 +49,12 @@ class _GirisState extends State<Giris> with SingleTickerProviderStateMixin {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             spinkit,
-            //   Image.asset('assets/images/splash.png', width: 100, height: 100,),
             SizedBox(
               height: 20,
             ),
             Text(
               "SENSEAPP",
-              style: TextStyle(fontSize: 30),
+              style: TextStyle(fontSize: 30),//ekrandaki senseapp yazısının olduğu widgetlar burada oluşturuldu.
             ),
           ],
         ),

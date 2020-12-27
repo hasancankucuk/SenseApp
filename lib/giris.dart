@@ -12,7 +12,9 @@ class LandingScreen extends StatefulWidget {
 }
 
 class _LandingScreenState extends State<LandingScreen> {
-  io.File imageFile;
+  File imageFile;// kullanılacak fotoğraf dosyasının tanıtıldığı değişken
+
+  // bu fonksiyon galeriye gitmeyi ve seçilen resmin analiz ekranına verilmesini sağlıyor.
   _openGaleri(BuildContext context) async {
     // ignore: deprecated_member_use
     var picture = await ImagePicker.pickImage(source: ImageSource.gallery);
@@ -21,7 +23,7 @@ class _LandingScreenState extends State<LandingScreen> {
     });
     Navigator.of(context).pop();
   }
-
+//bu fonksiyon kameraya gitmeyi ve çekilip onayladığımız fotoğrafın analiz ekranına verilmesini sağlıyor.
   _openKamera(BuildContext context) async {
     // ignore: deprecated_member_use
     var picture = await ImagePicker.pickImage(source: ImageSource.camera);
@@ -31,6 +33,7 @@ class _LandingScreenState extends State<LandingScreen> {
     Navigator.of(context).pop();
   }
 
+// fotoğraf seç butonuna tıklandıktan sonra seçilecek olan fotoğrafın galeriden ya da kamera aracılığıyla seçilmesinin kontrolü bu fonksiyonda yapılmaktadır.
   Future<void> _showChoiceDialog(BuildContext context) {
     return showDialog(
         context: context,
@@ -55,7 +58,7 @@ class _LandingScreenState extends State<LandingScreen> {
                         ),
                       ),
                       onTap: () {
-                        _openGaleri(context);
+                        _openGaleri(context);// yukarıda tanımlanan galeriyi açıp seçim yapmamızı sağlayan fonksiyon burada kullanılmıştır.
                       },
                     ),
                   ),
@@ -68,7 +71,7 @@ class _LandingScreenState extends State<LandingScreen> {
                             color: Color(0xff212121),
                           )),
                       onTap: () {
-                        _openKamera(context);
+                        _openKamera(context);// aynı şekilde yukarıda tanımlanıp kamerayı açmamızı sağlayan fonksiyon burada çağırılmıştır.
                       },
                     ),
                   ),
@@ -79,6 +82,8 @@ class _LandingScreenState extends State<LandingScreen> {
         });
   }
 
+
+//fotoğraf seçilip seçilmediği bu fonsiyonda kontrol ediliyor. duruma göre seçilmediğinin uyarısı verilip seçilmiş olduğu takdirde container içerisine resmi yerleştiriyor.
   Widget _decideImageView() {
     if (imageFile == null) {
       return Text("Fotoğraf Seçilmedi. Lütfen Fotoğraf Seçin.",
@@ -97,7 +102,7 @@ class _LandingScreenState extends State<LandingScreen> {
       );
     }
   }
-
+// fotoğraf seç butonu bir fotoğraf seçilip ekrana yerleştirildikten sonra bu fonksiyondaki kontrol sayesinde yeni fotoğraf butonu olarak değiştiriliyor.
   Widget _changeImage() {
     if (imageFile != null) {
       return Text(
@@ -111,7 +116,7 @@ class _LandingScreenState extends State<LandingScreen> {
       );
     }
   }
-
+// bu fonksiyonda seçilen fotoğrafın kullanılması için yönlendirme yapan bir buton oluşturulmuştur.
   Widget _useImage() {
     if (imageFile != null) {
       return RaisedButton(
@@ -157,21 +162,21 @@ class _LandingScreenState extends State<LandingScreen> {
       return Text("");
     }
   }
-
+// ekran aşağıda çizilmektedir.
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xffFFFFFF),
       appBar: AppBar(
         backgroundColor: Color(0xff0288D1),
-        title: Center(child: Text("SENSEAPP", style: TextStyle(fontSize: 35))),
+        title: Center(child: Text("SENSEAPP", style: TextStyle(fontSize: 35))),//appbarın stilleri ayarlanmıştır.
       ),
       body: Container(
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              _decideImageView(),
+              _decideImageView(),//yukarıda tanıtılan fonksiyon burada çağırılmıştır. 
               RaisedButton(
                 padding: EdgeInsets.fromLTRB(20, 15, 25, 15),
                 color: Color(0xffB3E5FC),
@@ -182,11 +187,11 @@ class _LandingScreenState extends State<LandingScreen> {
                   side: BorderSide(color: Color(0xff2196F3)),
                 ),
                 onPressed: () {
-                  _showChoiceDialog(context);
+                  _showChoiceDialog(context);//yukarıda tanıtılan fonksiyon burada çağırılmıştır. 
                 },
-                child: _changeImage(),
+                child: _changeImage(),//yukarıda tanıtılan fonksiyon burada çağırılmıştır. 
               ),
-              _useImage(),
+              _useImage(),//yukarıda tanıtılan fonksiyon burada çağırılmıştır. 
             ],
           ),
         ),

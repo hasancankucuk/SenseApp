@@ -1,4 +1,4 @@
-#Sun Dec 27 19:46:39 EET 2020
-base.0=/Users/hasancan/Documents/GitHub/BitirmeOdevi/build/app/intermediates/dex/debug/mergeDexDebug/out/classes.dex
+#Sat Dec 12 21:17:02 EET 2020
+base.0=C\:\\Users\\Saadet\\Documents\\GitHub\\BitirmeOdevi\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\out\\classes.dex
 path.0=classes.dex
 renamed.0=classes.dex
