@@ -1,9 +1,7 @@
-//import 'dart:html';
 import 'package:flutter/material.dart';
 import 'dart:io' as io;
 import 'package:image_picker/image_picker.dart';
 import 'dart:ui';
-// import 'deneme.dart';
 import 'package:http/http.dart' as http;
 
 class LandingScreen extends StatefulWidget {
@@ -137,26 +135,26 @@ class _LandingScreenState extends State<LandingScreen> {
           style: TextStyle(fontSize: 20, color: Color(0xff212121)),
         ),
         onPressed: () async {
-          var request = http.MultipartRequest('POST',
-              Uri.parse('http://192.168.1.26:55777/api/FileUpload/uploadFile'));
+          var request = http.MultipartRequest('POST', 
+              Uri.parse('http://192.168.1.26:55777/api/FileUpload/uploadFile')); //api ye bağlanmak için gerekli localhost adresi
           request.files.add(
-              await http.MultipartFile.fromPath('', imageFile.path.toString()));
+              await http.MultipartFile.fromPath('', imageFile.path.toString())); //fotoğrafın konumunu alır
           http.StreamedResponse response = await request.send();
-          if (response.statusCode == 200) {
+          if (response.statusCode == 200) { // yüz algılanır ve cevap bulunursa
             //print(await response.stream.bytesToString());
             var alertDialog = AlertDialog(
               title: Text("Analiz Sonucu:"),
-              content: Text(await response.stream.bytesToString()),
+              content: Text(await response.stream.bytesToString()), //api python a gönderdiği fotoğrafın analiz sonucu uygulamaya geri gönderir
             );
             showDialog(
                 context: context,
                 builder: (BuildContext context) {
                   return alertDialog;
                 });
-          } else if (response.statusCode == 404) {
+          } else if (response.statusCode == 404) { //yüz algılanmadı ve cevap yok
             print("Yüz algılanamadı");
           } else {
-            print(response.reasonPhrase);
+            print(response.reasonPhrase);// 200 ve 404 dışında gelen hata kodlarını yazdırır.
           }
           // Navigator.push(context,
           //     new MaterialPageRoute(builder: (context) => new Deneme()));

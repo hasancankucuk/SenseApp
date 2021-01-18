@@ -16,7 +16,7 @@ class _BaslangicState extends State<Baslangic> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text("HOŞGELDİN!", style: TextStyle(fontSize: 30, fontFamily: 'PatrickHand') ,),
+              Text("HOŞGELDİN!", style: TextStyle(fontSize: 30,) ,),
               Padding(padding: EdgeInsets.all(8.0)),
               RaisedButton(
                 padding: EdgeInsets.fromLTRB(20, 15, 25, 15),
@@ -28,7 +28,7 @@ class _BaslangicState extends State<Baslangic> {
                   side: BorderSide(color: Color(0xff2196F3)),
                 ),child: Text(
                   "ŞİMDİ BAŞLA",
-                  style: TextStyle( color:Colors.white, fontSize: 20, fontFamily: 'PatrickHand'),
+                  style: TextStyle( color:Colors.white, fontSize: 20,),
                 ),
                 onPressed: () => Navigator.pushReplacement(
                     context,
